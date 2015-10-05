@@ -1,0 +1,7 @@
+{
+  "servicenow": {
+    "url": "<%= filters.servicenow.Url %>",
+    "username": "<%= filters.servicenow.UserName %>",
+    "password": "<%= filters.servicenow.Password %>"
+  }
+}

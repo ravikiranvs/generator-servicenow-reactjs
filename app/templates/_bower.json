@@ -1,0 +1,7 @@
+{
+  "name": "<%= appname %>",
+  "dependencies": {<% if(filters.bootstrap) { %>
+    "bootstrap": "~3.3.5",<% } %>
+    "react": "~0.13.3"
+  }
+}

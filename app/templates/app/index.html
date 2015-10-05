@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title><%= (appname) %></title>
+	<% if(filters.bootstrap) { %><link rel="stylesheet" type="text/css" href=".\bower_components\bootstrap\dist\css\bootstrap.css" /><% } %>
+	<% if(!filters.bootstrap) { %><link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" /><% } %>
+	</head>
+
+	<body>
+		<div class="jumbotron">
+			<div class="container">
+				<h1><%= (appname) %></h1>
+				<p class="lead">Kick-start your development with Servicenow</p>
+			</div>
+		</div>
+
+		<div class="container">
+			<h2 class="row">
+				Components:
+			</h2>
+			<br />
+
+			<div id="components" class="row">
+				<!-- React Components -->
+			</div>
+		</div>
+
+		<% if(filters.bootstrap) { %><script type="text/javascript" src=".\bower_components\jquery\dist\jquery.js"></script>
+		<script type="text/javascript" src=".\bower_components\bootstrap\dist\js\bootstrap.js"></script><% } %>
+		<% if(!filters.bootstrap) { %><script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script><% } %>
+		<script type="text/javascript">
+			var divComponents = $('#components');
+			if(divComponents.children().length == 0){
+				divComponents.append('<h3>Add a new component with <mark><strong>yo servicenow-reactjs:component <em>ComponentName</em></strong></mark></h3>')
+			}
+		</script>
+	</body>
+</html>

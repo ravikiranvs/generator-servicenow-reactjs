@@ -1,0 +1,4 @@
+/* CSS specific for <%= (name) %> component */
+.<%= (name) %>{
+	color: green;
+}

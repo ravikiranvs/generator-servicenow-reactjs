@@ -1,0 +1,22 @@
+{
+  "name": "generator-servicenow-reactjs",
+  "version": "0.1.0",
+  "description": "Creating react.js components for servicenow",
+  "files": [
+    "app",
+    "router"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "fs": "0.0.2",
+    "glob": "^5.0.14",
+    "html-wiring": "^1.2.0",
+    "path": "^0.12.7",
+    "underscore": "^1.8.3",
+    "underscore.string": "^3.2.2",
+    "yeoman-generator": "^0.20.2"
+  },
+  "author": "EMC"
+}
