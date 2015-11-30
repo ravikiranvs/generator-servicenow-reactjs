@@ -29,7 +29,7 @@ ServiceNowFile.prototype.readFile = function (callback) {
 ServiceNowFile.prototype.checkIfFileExistsInSN = function (options, callback) {
    var auth = new Buffer(options.username + ":" + options.password).toString("base64");
    var reqOptions = {
-      url: options.url + '/api/now/table/sys_ui_script?name=' + this.filename,
+      url: options.url + '/api/now/table/' + options.Table + '?name=' + this.filename,
       method: 'GET',
       headers: {
          'Accept': 'application/json',
@@ -54,28 +54,37 @@ ServiceNowFile.prototype.checkIfFileExistsInSN = function (options, callback) {
 
 ServiceNowFile.prototype.uploadToSN = function (isNotNew, options, callback) {
    var auth = new Buffer(options.username + ":" + options.password).toString("base64");
+   
+   var reqContent = {};
+   if(options.Table == 'sys_ui_script'){
+         reqContent.global = "false";
+         reqContent.script = this.fileData;
+         reqContent.description = "";
+         reqContent.active = "true";
+         reqContent.name = this.filename;
+   }
+   else if(options.Table == 'content_css'){
+         reqContent.name = this.filename;
+         reqContent.type = "local";
+         reqContent.style = this.fileData;
+   }
+   
    var reqOptions = {
       headers: {
          'Accept': 'application/json',
          'Content-Type': 'application/json',
          'Authorization': ("Basic " + auth)
       },
-      body: JSON.stringify({
-         "global": "false",
-         "script": this.fileData,
-         "description": "",
-         "active": "true",
-         "name": this.filename
-      })
+      body: JSON.stringify(reqContent)
    };
 
    if(isNotNew){
-      reqOptions.url = options.url + '/api/now/table/sys_ui_script/' + this.sys_id;
+      reqOptions.url = options.url + '/api/now/table/' + options.Table + '/' + this.sys_id;
       reqOptions.method = 'PUT';
       
    }
    else{
-      reqOptions.url = options.url + '/api/now/table/sys_ui_script';
+      reqOptions.url = options.url + '/api/now/table/' + options.Table;
       reqOptions.method = 'POST';
    }
 
@@ -95,7 +104,6 @@ ServiceNowFile.prototype.uploadToSN = function (isNotNew, options, callback) {
 var servicenowUploaderPlugin = function(options) {
    return map(function(file, cb) {
       var snFile = new ServiceNowFile(file);
-
       snFile.readFile(function(fileData){
          snFile.fileData = fileData;
          snFile.checkIfFileExistsInSN(options, function(exists, body){

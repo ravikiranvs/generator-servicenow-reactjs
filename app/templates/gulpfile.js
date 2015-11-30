@@ -15,6 +15,8 @@ var uglify = require('gulp-uglify'); //minify js
 var configReader = require('config'); //reads external config file
 var snUploader = require('./gulp-servicenow-uploader'); //uploads js files to servicenow
 var karmaServer = require('karma').Server; //Unit test runner
+var minifyCss = require('gulp-minify-css'); //minify css
+var concat = require('gulp-concat'); //concat files
 /**************************************Section End**************************************/
 
 
@@ -39,6 +41,7 @@ var config = {
 			jsx: './dest/app/react_components/**/*.jsx',
 			testJs: './dest/app/react_components/**/*.test.bundle.js',
 			js: './dest/app/react_components/**/*.js',
+			css: './dest/app/css',
 			serve: 'dest\\app'
 		}
 	}
@@ -182,11 +185,42 @@ gulp.task('compress', ['cleanUpBuild'], function(done) {
     .pipe(gulp.dest(config.paths.dest.reactComponents));
 });
 
-gulp.task('deploy', ['compress'], function(){
-	var snConfig = configReader.get('servicenow');
+gulp.task('deploy', ['deployJs'], function(){
+	/*var snConfig = configReader.get('servicenow');
 	
+	var jsConfig = snConfig;
+	jsConfig.Table = "sys_ui_script";
 	gulp.src(config.paths.dest.js)
-		.pipe(snUploader(snConfig));
+		.pipe(snUploader(jsConfig));
+	
+	var cssConfig = snConfig;
+	cssConfig.Table = "content_css";
+	gulp.src(config.paths.dest.css + '/*')
+		.pipe(snUploader(cssConfig));*/
+});
+
+gulp.task('deployJs', ['deployCss'], function(done){
+	var jsConfig = configReader.get('servicenow');
+	
+	jsConfig.Table = "sys_ui_script";
+	gulp.src(config.paths.dest.js)
+		.pipe(snUploader(jsConfig))
+		.on('end', function(){ 
+			console.log("JS Files upload complete.");
+			setTimeout(done, 100); 
+		});
+});
+
+gulp.task('deployCss', ['css'], function(done){
+	var cssConfig = configReader.get('servicenow');
+	cssConfig.Table = "content_css";
+	gulp.src(config.paths.dest.css + '/*.min.css')
+		//.pipe(clean())
+		.pipe(snUploader(cssConfig))
+		.on('end', function(){ 
+			console.log("CSS Files upload complete.");
+			setTimeout(done, 100); 
+		});
 });
 
 gulp.task('test', ['jsxTest'], function(done){
@@ -194,4 +228,13 @@ gulp.task('test', ['jsxTest'], function(done){
 		configFile: __dirname + '/karma.conf.js',
 		singleRun: true
 	}, function(){done();}).start();
+});
+
+//CSS merge and minify
+gulp.task('css', ['compress'], function(done){
+	gulp.src(config.paths.source.css)
+		.pipe(minifyCss())
+		.pipe(concat('testSnYo.bundle.min.css'))
+		.pipe(gulp.dest(config.paths.dest.css))
+		.on('end', function(){ setTimeout(done, 100); });
 });
