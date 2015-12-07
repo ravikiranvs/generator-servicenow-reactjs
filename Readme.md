@@ -4,6 +4,7 @@
 The servicenow-reactjs generator provides a simple way for creating reusable components for ServiceNow using the react.js framework.
 
 ServiceNow is a great platfrom for building applications for Service Management however we found that the development process isn't streamlined:
+
 1. There is no IDE.
 2. There is a place to store reusable JavaScript but not for HTML which goes along with it. The problem comes while changing the reusable script, we are not sure of all the places it is being used.
 3. Cannot write and run unit tests.
