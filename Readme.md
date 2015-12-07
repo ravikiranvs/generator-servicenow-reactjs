@@ -1,17 +1,25 @@
 #Yeoman generator for creating react.js components for ServiceNow
 
 ##What is servicenow-reactjs
-The servicenow-reactjs generator provides a simple way for creating reusable components for service now using the react.js framework.
-###Features:
-* Live Reload
+The servicenow-reactjs generator provides a simple way for creating reusable components for ServiceNow using the react.js framework.
+
+ServiceNow is a great platfrom for building applications for Service Management however we found that the development process isn't streamlined:
+1. There is no IDE.
+2. There is a place to store reusable JavaScript but not for HTML which goes along with it. The problem comes while changing the reusable script, we are not sure of all the places it is being used.
+3. Cannot write and run unit tests.
+4. Source control like GIT.
+5. Have a build process: Compress, Test and Deploy
+
+###Features provided in servicenow-reactjs:
+* Live Reload of code cahnges on browser
 * Run Tests using Karma
-* Deploy the components to ServiceNow
-* Use GIT for source control
+* Gulp tasks to compress and deploy the components to ServiceNow
+* Use GIT for source control instead of relying on ServiceNow
 
 ##How to install
-Install `yo`, `grunt-cli`, `bower`, and `generator-servicenow-reactjs`
+Install `yo`, `gulp-cli`, `bower`, and `generator-servicenow-reactjs`
 ```
-$ npm install -g yo grunt-cli bower generator-servicenow-reactjs
+$ npm install -g yo gulp-cli bower generator-servicenow-reactjs
 ```
 ##Using the generator
 ###Creating a project for your components
