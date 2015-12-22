@@ -1,21 +1,24 @@
 #Yeoman generator for creating react.js components for ServiceNow
-
 ##What is servicenow-reactjs
-The servicenow-reactjs generator provides a simple way for creating reusable components for ServiceNow using the react.js framework.
+[ServiceNow](http://www.servicenow.com/) is a great platfrom for building applications for `Service Management`. 
+But we found it to be lacking some features for web development that we have become accustomed to:
 
-ServiceNow is a great platfrom for building applications for Service Management however we found that the development process isn't streamlined:
+1. A way to develop solutions locally in an Text Editor / IDE of our choice.
+2. Cannot write and run unit tests for JavaScript.
+3. Using a source control like GIT.
+4. Have a build process: Compress JavaScript and CSS, Unit Test and Deploy into ServiceNow.
+5. Making the code re-usable. HTML is tightly coupled with JS and we would like to include the HTML along with JS into the `UI Scripts` table as well.
 
-1. There is no IDE.
-2. There is a place to store reusable JavaScript but not for HTML which goes along with it. The problem comes while changing the reusable script, we are not sure of all the places it is being used.
-3. Cannot write and run unit tests.
-4. Source control like GIT.
-5. Have a build process: Compress, Test and Deploy
+We created servicenow-reactjs as a way to fill this gap.
+ 
+`servicenow-reactjs` is a yeoman generator that provides a simple way for creating [reusable components](https://facebook.github.io/react/docs/reusable-components.html) for ServiceNow using the `react.js` framework.
 
 ###Features provided in servicenow-reactjs:
-* Live Reload of code cahnges on browser
-* Run Tests using Karma
-* Gulp tasks to compress and deploy the components to ServiceNow
-* Use GIT for source control instead of relying on ServiceNow
+* Run your ServiceNow solution locally. With this you can use a Text Editor / IDE of your choice, use GIT for source control.
+* Live Reload of code changes on browser. As soon as you save your code changes the local browser reloads with the changes.
+* Run Tests on your JS using Karma
+* We have used Gulp to create tasks to compress and deploy JS and CSS to ServiceNow.
+* react.js enforces us to combine HTML into JS thus we can have the re-usable scripts in `UI Scripts` table.
 
 ##How to install
 Install `yo`, `gulp-cli`, `bower`, and `generator-servicenow-reactjs`
@@ -36,15 +39,15 @@ $ yo servicenow-reactjs:component [ComponentName]
 .
 ├── /app/                                       # All of our app specific components go in here
 │   ├── /bower_components/                      # 3rd-party bower libraries and utilities
-│   ├── /css/                                   # Contains bundeled css from all the created components
+│   ├── /css/                                   # Contains bundled css from all the created components
 │   ├── /react_components/                      # Reusable react.js components
-│   │   └── /ComponentName/                     # Folder cerated to store all resources related to a component
+│   │   └── /[ComponentName]/                   # Folder created to store all resources related to a component
 │   │       ├── /__tests__/                     # Contains test cases for the component
-│   │       │   └── /ComponentName.test.jsx     # File containing the tests
-│   │       ├── /ComponentName.css              # CSS for the component
-│   │       ├── /ComponentName.jsx              # Reusable JSX for the react.js component 
-│   │       ├── /ComponentName.data.js          # Mock data for the component
-│   │       ├── /ComponentName.render.jsx       # JSX for rendering the reusable component
+│   │       │   └── /[ComponentName].test.jsx   # File containing the tests
+│   │       ├── /[ComponentName].css            # CSS for the component
+│   │       ├── /[ComponentName].jsx            # Reusable JSX for the react.js component 
+│   │       ├── /[ComponentName].data.js        # Mock data for the component
+│   │       ├── /[ComponentName].render.jsx     # JSX for rendering the reusable component
 │   │       └── /index.html                     # Page already setup with the react.js component
 │   └── /index.html                             # Home page showing a list of all the components developed
 ├── /config/                                    # Folder containing servicenow configuration
@@ -59,8 +62,8 @@ $ yo servicenow-reactjs:component [ComponentName]
 ├── /karma.conf.js                              # Configuration for running the tests
 └── /package.json                               # The list of npm 3rd party libraries and utilities
 ```
-##Working with servicenow Jelly
-Writing Jelly still needs to be done in a servicenow instance.
+##Working with ServiceNow Jelly (Using your deployed component in ServiceNow)
+Writing Jelly still needs to be done in a ServiceNow instance.
 
 The data from the Jelly should to be serialized to JSON:
 ```
@@ -112,7 +115,7 @@ $ gulp test
 ```
 ##Deploying to ServiceNow
 * The JS files are copied into the `UI Scripts` table.
-* All the CSS files are bundled and copyed into the `Style Sheet` table
+* All the CSS files are bundled and copied into the `Style Sheet` table
 
 ```
 $ gulp deploy
