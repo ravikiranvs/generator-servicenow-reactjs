@@ -1,6 +1,6 @@
 #Yeoman generator for creating react.js components for ServiceNow
 ##What is servicenow-reactjs
-[ServiceNow](http://www.servicenow.com/) is a great platfrom for building applications for `Service Management`. 
+[ServiceNow](http://www.servicenow.com/) is a great platform for building applications for `Service Management`. 
 But we found it to be lacking some features for web development that we have become accustomed to:
 
 1. A way to develop solutions locally in an Text Editor / IDE of our choice.
