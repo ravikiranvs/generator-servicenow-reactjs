@@ -1,5 +1,5 @@
-#Yeoman generator for creating react.js components for ServiceNow
-##What is servicenow-reactjs
+# Yeoman generator for creating react.js components for ServiceNow
+## What is servicenow-reactjs
 [ServiceNow](http://www.servicenow.com/) is a great platform for building applications for `Service Management`. 
 But we found it to be lacking some features for web development that we have become accustomed to:
 
@@ -13,28 +13,28 @@ We created servicenow-reactjs as a way to fill this gap.
  
 `servicenow-reactjs` is a yeoman generator that provides a simple way for creating [reusable components](https://facebook.github.io/react/docs/reusable-components.html) for ServiceNow using the `react.js` framework.
 
-###Features provided in servicenow-reactjs:
+### Features provided in servicenow-reactjs:
 * Run your ServiceNow solution locally. With this you can use a Text Editor / IDE of your choice, use GIT for source control.
 * Live Reload of code changes on browser. As soon as you save your code changes the local browser reloads with the changes.
 * Run Tests on your JS using Karma
 * We have used Gulp to create tasks to compress and deploy JS and CSS to ServiceNow.
 * react.js enforces us to combine HTML into JS thus we can have the re-usable scripts in `UI Scripts` table.
 
-##How to install
+## How to install
 Install `yo`, `gulp-cli`, `bower`, and `generator-servicenow-reactjs`
 ```
 $ npm install -g yo gulp-cli bower generator-servicenow-reactjs
 ```
-##Using the generator
-###Creating a project for your components
+## Using the generator
+### Creating a project for your components
 ```
 $ yo servicenow-reactjs [AppName]
 ```
-###Creating a component
+### Creating a component
 ```
 $ yo servicenow-reactjs:component [ComponentName]
 ```
-###Folder Structure
+### Folder Structure
 ```
 .
 ├── /app/                                       # All of our app specific components go in here
@@ -62,7 +62,7 @@ $ yo servicenow-reactjs:component [ComponentName]
 ├── /karma.conf.js                              # Configuration for running the tests
 └── /package.json                               # The list of npm 3rd party libraries and utilities
 ```
-##Working with ServiceNow Jelly (Using your deployed component in ServiceNow)
+## Working with ServiceNow Jelly (Using your deployed component in ServiceNow)
 Writing Jelly still needs to be done in a ServiceNow instance.
 
 The data from the Jelly should to be serialized to JSON:
@@ -72,7 +72,7 @@ var jsonData = json.encode(data);
 ```
 The JSON can then be mocked by copying it into the file `ComponentName`.data.js
 
-###Sample Jelly which sets up a react.js component:
+### Sample Jelly which sets up a react.js component:
 ```
 <?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
@@ -106,14 +106,14 @@ The JSON can then be mocked by copying it into the file `ComponentName`.data.js
 	<script language="javascript" src="ComponentName.render.bundle.js.jsdbx" />
 </j:jelly>
 ``` 
-##Testing
+## Testing
 Tests for each component needs to be in the `ComponentName`.test.jsx file.
 
 To Run the tests:
 ```
 $ gulp test
 ```
-##Deploying to ServiceNow
+## Deploying to ServiceNow
 * The JS files are copied into the `UI Scripts` table.
 * All the CSS files are bundled and copied into the `Style Sheet` table
 
@@ -121,5 +121,5 @@ $ gulp test
 $ gulp deploy
 ```
 
-##Support
+## Support
 Please file bugs and issues at the Github issues page. For more general discussions you can contact the EMC Code team at <a href="https://groups.google.com/forum/#!forum/emccode-users">Google Groups</a> or tagged with **EMC** on <a href="https://stackoverflow.com">Stackoverflow.com</a>. The code and documentation are released with no warranties or SLAs and are intended to be supported through a community driven process.
